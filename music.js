@@ -20,7 +20,7 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function (d, e) {
     playedKeys = [],
     currentKey;
 
-  function nextKey() {
+  function nextKey(preferredKey) {
     if (remainingKeys.length === 0) {
       currentKey = null
 
@@ -28,8 +28,13 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function (d, e) {
       return
     }
 
-    shuffle(remainingKeys)
-    currentKey = remainingKeys[0]
+    if (preferredKey == null) {
+      shuffle(remainingKeys)
+      currentKey = remainingKeys[0]
+    } else {
+      currentKey = preferredKey
+    }
+
     $("#currentKey").html("Current Key: " + currentKey)
   }
 
@@ -57,8 +62,12 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function (d, e) {
     return a;
   }
 
-  $(document).on("click", "#nextKey", nextKey)
   $(document).on("click", "#doneButton", done)
+  $(document).on("click", "#nextKey", function () { nextKey() })
+  $(document).on("click", ".btn-key", function () {
+    var key = $(this).text()
+    nextKey(key)
+  })
 
   $(function () {
     allKeys = $(".btn-key").map((i, el) => $(el).text()).toArray()
