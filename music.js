@@ -25,6 +25,7 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function (d, e) {
       currentKey = null
 
       $("#currentKey").html("All keys completed! Refresh.")
+      return
     }
 
     shuffle(remainingKeys)
