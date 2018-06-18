@@ -18,6 +18,7 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function (d, e) {
   var allKeys,
     remainingKeys,
     playedKeys = [],
+    signatures = ["9/8", "3/4", "4/4", "6/8"],
     currentKey;
 
   function nextKey(preferredKey) {
@@ -36,6 +37,9 @@ Array.prototype.indexOf || (Array.prototype.indexOf = function (d, e) {
     }
 
     $("#currentKey").html("Current Key: " + currentKey)
+
+    shuffle(signatures)
+    $("#signature").html("Signature: " + signatures[0])
   }
 
   function done() {
